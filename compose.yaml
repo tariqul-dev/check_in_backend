@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: sit-db
+    environment:
+      POSTGRES_DB: sit-db
+      POSTGRES_USER: sit-user
+      POSTGRES_PASSWORD: sit-user
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

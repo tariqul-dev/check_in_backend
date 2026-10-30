@@ -1,3 +1,8 @@
 spring:
   application:
     name: check_in_backend
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
