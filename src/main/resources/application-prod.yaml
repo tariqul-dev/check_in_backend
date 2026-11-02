@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+spring:
+  docker:
+    compose:
+      profiles:
+        active: prod
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5435}/${DB_NAME:prod-db}
+    username: ${DB_USER:prod-user}
+    password: ${DB_PASSWORD:prod-user}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+logging:
+  level:
+    root: WARN
+    com.tariqul.dev: INFO
+    org.hibernate.SQL: ERROR

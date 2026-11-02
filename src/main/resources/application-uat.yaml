@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  docker:
+    compose:
+      profiles:
+        active: uat
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5434}/${DB_NAME:uat-db}
+    username: ${DB_USER:uat-user}
+    password: ${DB_PASSWORD:uat-user}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+logging:
+  level:
+    root: INFO
+    com.tariqul.dev: INFO
+    org.hibernate.SQL: WARN

@@ -1,5 +1,5 @@
 services:
-  postgres:
+  postgres-sit:
     image: postgres:18
     container_name: sit-db
     environment:
@@ -9,8 +9,48 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql
+      - sit_postgres_data:/var/lib/postgresql
     restart: unless-stopped
+    profiles:
+      - sit
+    labels:
+      - org.springframework.boot.service-connection=postgres
+
+  postgres-uat:
+    image: postgres:18
+    container_name: uat-db
+    environment:
+      POSTGRES_DB: uat-db
+      POSTGRES_USER: uat-user
+      POSTGRES_PASSWORD: uat-user
+    ports:
+      - "5434:5432"
+    volumes:
+      - uat_postgres_data:/var/lib/postgresql
+    restart: unless-stopped
+    profiles:
+      - uat
+    labels:
+      - org.springframework.boot.service-connection=postgres
+
+  postgres-prod:
+    image: postgres:18
+    container_name: prod-db
+    environment:
+      POSTGRES_DB: prod-db
+      POSTGRES_USER: prod-user
+      POSTGRES_PASSWORD: prod-user
+    ports:
+      - "5435:5432"
+    volumes:
+      - prod_postgres_data:/var/lib/postgresql
+    restart: unless-stopped
+    profiles:
+      - prod
+    labels:
+      - org.springframework.boot.service-connection=postgres
 
 volumes:
-  postgres_data:
+  sit_postgres_data:
+  uat_postgres_data:
+  prod_postgres_data:

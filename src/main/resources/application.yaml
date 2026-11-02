@@ -1,8 +1,11 @@
 spring:
   application:
     name: check_in_backend
-
+  profiles:
+    default: prod
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start-only
   jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+    open-in-view: false
